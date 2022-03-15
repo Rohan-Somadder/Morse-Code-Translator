@@ -80,7 +80,8 @@ def main():
         choice = int(input('Enter: '))
     except ValueError:
         choice = -1
-    input_string = input("Enter the string to be converted : ")
+    if choice in [1, 2]:
+        input_string = input("Enter the string to be converted : ")
     if choice == 1:
         english = decode(input_string)
         print('\nENGLISH TRANSLATION : ', english, sep='  ')
