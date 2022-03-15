@@ -24,11 +24,33 @@ def display():
     print('ELSE : EXIT')
 
 
+def ret_code(val: string) -> string:
+    '''
+    returns the decoded meanings (Keys) from the morse (values) stored in CODE dictionary
+    '''
+    for dec, morse in CODE.items():
+        if morse == val:
+            return dec
+
+    return -1
+
+
 def decode(inp_str: string) -> string:
     '''
     Converts the morse code recieved to english using decoded.py
     '''
     answer = ''
+    inp_lst = inp_str.strip().split()
+    for char in inp_lst:
+        if char != '/':
+            try:
+                answer += ret_code(char)
+            except TypeError:
+                sys.exit(
+                    '\n' + 'UNKNOWN MORSE AS INPUT'.center(80, '*') + '\n')
+        else:
+            answer += ' '
+
     return answer
 
 
@@ -37,7 +59,16 @@ def encode(inp_str: string) -> string:
     Converts the english statement recieved to morse code
     '''
     answer = ''
-    return answer
+    for char in inp_str:
+        if char != ' ':
+            try:
+                answer += CODE[char.upper() if char.isalpha() else char] + ' '
+            except KeyError:
+                sys.exit(
+                    '\n' + 'UNKNOWN CHARACTER AS INPUT'.center(80, '*') + '\n')
+        else:
+            answer += ' / '
+    return answer.strip()
 
 
 def main():
@@ -49,13 +80,13 @@ def main():
         choice = int(input('Enter: '))
     except ValueError:
         choice = -1
-        input_string = input("Enter the string to be converted : ")
+    input_string = input("Enter the string to be converted : ")
     if choice == 1:
         english = decode(input_string)
-        print(english)
+        print('\nENGLISH TRANSLATION : ', english, sep='  ')
     elif choice == 2:
         morse_code = encode(input_string)
-        print(morse_code)
+        print('\nMORSE CODE EQUIVALENT : ', morse_code, sep='  ')
     sys.exit('\n' + '!!!PROGRAM ENDED!!!'.center(80, '*') + '\n')
 
 
