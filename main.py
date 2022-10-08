@@ -2,11 +2,10 @@
 --------------------------------------------------
 Morse Code Translator
 --------------------------------------------------
-TODO : None
-
+#TODO : None
 '''
 
-import string
+
 import sys
 from decoded import CODE
 
@@ -24,7 +23,7 @@ def display():
     print('ELSE : EXIT')
 
 
-def ret_code(val: string) -> string:
+def ret_code(val: str) -> str:
     '''
     returns the decoded meanings (Keys) from the morse (values) stored in CODE dictionary
     '''
@@ -32,10 +31,10 @@ def ret_code(val: string) -> string:
         if morse == val:
             return dec
 
-    return -1
+    return ''
 
 
-def decode(inp_str: string) -> string:
+def decode(inp_str: str) -> str:
     '''
     Converts the morse code recieved to english using decoded.py
     '''
@@ -54,7 +53,7 @@ def decode(inp_str: string) -> string:
     return answer
 
 
-def encode(inp_str: string) -> string:
+def encode(inp_str: str) -> str:
     '''
     Converts the english statement recieved to morse code
     '''
@@ -76,6 +75,7 @@ def main():
     Main function of the program
     '''
     display()
+    input_string = ''
     try:
         choice = int(input('Enter: '))
     except ValueError:
